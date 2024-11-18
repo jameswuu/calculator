@@ -1,36 +1,53 @@
 let buttons = document.querySelectorAll(".calculator-button")
-let num1 = [];
-let num2 = [];
-let hasOperator = false;
+let num1 = '';
+let num2 = '';
 let operator = null;
+let hasOperator = false;
+
 
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
-        // Print the id of the clicked button
-        console.log(`The id of the button is ${button.id}`)
-        console.log(`The content is ${button.textContent}`)
 
-        // Create temperary variable
-        if (button.id === 'number' && operator === false) {
-            num1.push(button.textContent);
-        } else if (operator === true) {
-            num2.push(button.textContent);
+        // Update num1 and num2
+        if (button.id === "number") {
+            if (hasOperator === false) {
+                num1 = num1 + button.textContent;
+            } else if (hasOperator === true) {
+                num2 = num2 + button.textContent;
+            }
         }
 
         // Change operator status 
-        if (num1 !== null && button.id ==='symbol' && opeartor === null) {
-            hasOperator = true;
-            operator = button.textContent;
-        } else if (num2 === null){
-            num2 = num1;
-            operate(num1,num2,symobl);
-        } else {
-            operate(num1,num2,symbol);
+        if (button.id === "symbol") {
+            if (num1 !== null && operator === null) {
+                hasOperator = true;
+                operator = button.textContent;
+            } else if (operator) {
+                let answer = operate(num1,num2,operator);
+                console.log(answer);
+            }
         }
         
+        // Debugging Line
+        console.log(`
+            The id of the button is ${button.id}
+            num1 is ${num1}
+            num2 is ${num2}
+            opeartor is ${operator}`)     
     });
 });
 
 function operate(num1, num2, symbol) {
+    // Debugging line
+    console.log("operate function ran");
 
+    if (symbol === '+') {
+        return (parseInt(num1, 10) + parseInt(num2, 10));
+    } else if (symbol === '-') {
+        return (parseInt(num1, 10) + parseInt(num2, 10));
+    } else if (symbol === '*') {
+        return (parseInt(num1, 10) + parseInt(num2, 10));
+    } else if (symbol === '/') {
+        return (parseInt(num1, 10) + parseInt(num2, 10));
+    } 
 }
