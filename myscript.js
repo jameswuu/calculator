@@ -15,7 +15,7 @@ buttons.forEach((button) => {
             // Reset the num1, num2, and opeartor
             resetCalculator(answer, operator);
             updateDisplay();
-            debuggingLine(button.id); 
+            debuggingLine(button.textContent); 
             return;
         } 
 
@@ -23,18 +23,18 @@ buttons.forEach((button) => {
         if (button.id === "clear" || num1 === 'Error') {
             clearCalculator();
             updateDisplay();
-            debuggingLine(button.id); 
+            debuggingLine(button.textContent); 
         }
 
         // Update num1 and num2
-        if (button.id === "number"){
+        if (button.classList.contains("number")){
             if (operator === null) {
                 num1 += button.textContent;
             } else {
                 num2 += button.textContent;
             }
             updateDisplay();
-            debuggingLine(button.id); 
+            debuggingLine(button.textContent); 
             return;
         }
 
@@ -52,7 +52,7 @@ buttons.forEach((button) => {
                 }
             }
             updateDisplay();
-            debuggingLine(button.id); 
+            debuggingLine(button.textContent); 
             return;
         }
 
@@ -64,7 +64,7 @@ buttons.forEach((button) => {
                 num2 = percent(num2);
             }
             updateDisplay();
-            debuggingLine(button.id); 
+            debuggingLine(button.textContent); 
             return;
         }
 
@@ -76,12 +76,12 @@ buttons.forEach((button) => {
                 num2 = pos_neg(num2);
             }
             updateDisplay();
-            debuggingLine(button.id); 
+            debuggingLine(button.textContent); 
             return;
         }
 
         // Change operator status 
-        if (button.id === "symbol") {
+        if (button.classList.contains("symbol")) {
             if (num1 && num2 && operator) {
                 // Calculate the result only both numbers and operator are set
                 num1 = operate(num1, num2, operator);
@@ -89,7 +89,7 @@ buttons.forEach((button) => {
             }
             operator = button.textContent; // Set the new operator
             updateDisplay();
-            debuggingLine(button.id); 
+            debuggingLine(button.textContent); 
             return;
         }
     });
@@ -106,9 +106,9 @@ function updateDisplay() {
 }
 
 
-function debuggingLine(id) {
+function debuggingLine(element) {
     console.log(`
-        The id of the button is ${id}
+        The content of the button is ${element}
         num1 is ${num1}
         num2 is ${num2}
         operator is ${operator}`)  
