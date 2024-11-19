@@ -10,8 +10,8 @@ let operator_previous = null;
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
         // Calculate answer using operate 
-        if (button.id === "equals" || 
-            (num1 && num2 && operator)
+        if ((button.id === "equals" && ((num1 && num2 && operator))|| 
+            (num1 && num2 && operator))
         ) {
             let answer = operate(num1,num2,operator);
             console.log(answer);
