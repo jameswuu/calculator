@@ -10,7 +10,8 @@ buttons.forEach((button) => {
     button.addEventListener("click", () => {
         // Calculate answer using operate 
         if ((button.id === "equals" && ((num1 && num2 && operator))|| 
-            (num1 && num2 && operator) && button.id!=='number' && button.id!=='percent')
+            (num1 && num2 && operator) && button.id !== 'number' 
+            && button.id !== 'percent' && button.id !== 'pos-neg')
         ) {
             let answer = operate(num1,num2,operator);
             console.log(answer);
@@ -45,6 +46,15 @@ buttons.forEach((button) => {
                 num1 = percent(num1);
             } else if (num1 && operator) {
                 num2 = percent(num2);
+            }
+        }
+
+        // To change num +ve to -ve vice versa
+        if (button.id === "pos-neg") {
+            if (num1 && !operator) {
+                num1 = pos_neg(num1);
+            } else if (num1 && operator) {
+                num2 = pos_neg(num2);
             }
         }
 
@@ -84,6 +94,12 @@ buttons.forEach((button) => {
    
     });
 });
+
+
+function pos_neg(num) {
+    console.log("pos-neg function ran");
+    return(parseFloat(num) * (-1));
+}
 
 
 function percent(num) {
