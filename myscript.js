@@ -11,7 +11,7 @@ buttons.forEach((button) => {
     button.addEventListener("click", () => {
         // Calculate answer using operate 
         if ((button.id === "equals" && ((num1 && num2 && operator))|| 
-            (num1 && num2 && operator))
+            (num1 && num2 && operator) && button.id!=='number')
         ) {
             let answer = operate(num1,num2,operator);
             console.log(answer);
