@@ -6,7 +6,8 @@ let operator = null;
 
 
 buttons.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", () => { 
+        
         // Calculate answer using operate 
         if (button.id === "equals" && num1 && num2 && operator) {
 
@@ -15,13 +16,15 @@ buttons.forEach((button) => {
 
             // Reset the num1, num2, and opeartor
             resetCalculator(answer, operator);
-            updateDisplay();
+            updateDisplay(); 
+            return;
         } 
 
         // Handle clear functionality
         if (button.id === "clear") {
             clearCalculator();
             updateDisplay();
+            return;
         }
 
         // Update num1 and num2
@@ -32,6 +35,7 @@ buttons.forEach((button) => {
                 num2 += button.textContent;
             }
             updateDisplay();
+            return;
         }
 
         // Handle Percentage
@@ -42,6 +46,7 @@ buttons.forEach((button) => {
                 num2 = percent(num2);
             }
             updateDisplay();
+            return;
         }
 
         // Handle positive/negative toggle
@@ -52,26 +57,23 @@ buttons.forEach((button) => {
                 num2 = pos_neg(num2);
             }
             updateDisplay();
+            return;
         }
 
         // Change operator status 
         if (button.id === "symbol") {
             if (num1 && num2 && operator) {
-                // Calculate the result if both numbers and operator are set
-                num1 = operate(num1, num2, operator);
-                num2 = ''; // Reset num2
-            } else if (num1 && !num2 && operator) {
-                num2 = num1;
+                // Calculate the result only both numbers and operator are set
                 num1 = operate(num1, num2, operator);
                 num2 = ''; // Reset num2
             }
             operator = button.textContent; // Set the new operator
             updateDisplay();
+            return;
         }
 
         // Debugging Line
         debuggingLine(button.id); 
-   
     });
 });
 
@@ -104,7 +106,7 @@ function clearCalculator() {
 
 function resetCalculator(result) {
     console.log("Reset function ran");
-    num1 = result;
+    num1 = result.toString();
     num2 = '';
     operator = null;
 }
@@ -112,13 +114,13 @@ function resetCalculator(result) {
 
 function pos_neg(num) {
     console.log("pos-neg function ran");
-    return(parseFloat(num) * (-1));
+    return(parseFloat(num) * (-1)).toString();
 }
 
 
 function percent(num) {
     console.log("percent function ran");
-    return(parseFloat(num) / 100);
+    return(parseFloat(num) / 100).toString();
 }
 
 
