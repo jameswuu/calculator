@@ -4,7 +4,7 @@ body {
     align-items: center;
     height: 100vh;
     background-color:#f0f0f0;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .calculator {
@@ -20,7 +20,7 @@ body {
 
 .display {
     height: 100px;
-    font-size: 32px;
+    font-size: 50px;
     text-align: right;
     align-content: center;
     padding-right: 2px;
