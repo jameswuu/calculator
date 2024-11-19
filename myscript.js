@@ -6,25 +6,24 @@ let operator = null;
 
 
 buttons.forEach((button) => {
-    button.addEventListener("click", () => { 
-        
+    button.addEventListener("click", () => {
         // Calculate answer using operate 
         if (button.id === "equals" && num1 && num2 && operator) {
-
             // Run the answer
             let answer = operate(num1, num2, operator);
 
             // Reset the num1, num2, and opeartor
             resetCalculator(answer, operator);
-            updateDisplay(); 
+            updateDisplay();
+            debuggingLine(button.id); 
             return;
         } 
 
         // Handle clear functionality
-        if (button.id === "clear") {
+        if (button.id === "clear" || num1 === 'Error') {
             clearCalculator();
             updateDisplay();
-            return;
+            debuggingLine(button.id); 
         }
 
         // Update num1 and num2
@@ -35,6 +34,7 @@ buttons.forEach((button) => {
                 num2 += button.textContent;
             }
             updateDisplay();
+            debuggingLine(button.id); 
             return;
         }
 
@@ -46,6 +46,7 @@ buttons.forEach((button) => {
                 num2 = percent(num2);
             }
             updateDisplay();
+            debuggingLine(button.id); 
             return;
         }
 
@@ -57,6 +58,7 @@ buttons.forEach((button) => {
                 num2 = pos_neg(num2);
             }
             updateDisplay();
+            debuggingLine(button.id); 
             return;
         }
 
@@ -69,11 +71,9 @@ buttons.forEach((button) => {
             }
             operator = button.textContent; // Set the new operator
             updateDisplay();
+            debuggingLine(button.id); 
             return;
         }
-
-        // Debugging Line
-        debuggingLine(button.id); 
     });
 });
 
