@@ -129,17 +129,16 @@ function operate(num1, num2, symbol) {
     console.log("operate function ran");
 
     if (symbol === '+') {
-        return (parseFloat(num1, 10) + parseFloat(num2, 10));
+        return (parseFloat(num1) + parseFloat(num2)).toString();
     } else if (symbol === '-') {
-        return (parseFloat(num1, 10) - parseFloat(num2, 10));
+        return (parseFloat(num1) - parseFloat(num2)).toString();
     } else if (symbol === '*') {
-        return (parseFloat(num1, 10) * parseFloat(num2, 10));
+        return (parseFloat(num1) * parseFloat(num2)).toString();
     } else if (symbol === '/') {
-        if (num2 === '0') {
-            // Handle division by zero
-            return 'Error'
+        if (parseFloat(num2) === 0) {
+            return 'Error'; // Handle division by zero
         } else {
-            return (parseFloat(num1) / parseFloat(num2));
+            return (parseFloat(num1) / parseFloat(num2)).toString();
         }
     } 
 }
