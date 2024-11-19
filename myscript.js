@@ -60,6 +60,10 @@ buttons.forEach((button) => {
                 // Calculate the result if both numbers and operator are set
                 num1 = operate(num1, num2, operator);
                 num2 = ''; // Reset num2
+            } else if (num1 && !num2 && operator) {
+                num2 = num1;
+                num1 = operate(num1, num2, operator);
+                num2 = ''; // Reset num2
             }
             operator = button.textContent; // Set the new operator
             updateDisplay();
@@ -98,12 +102,11 @@ function clearCalculator() {
 }
 
 
-function resetCalculator(result, symbol) {
+function resetCalculator(result) {
     console.log("Reset function ran");
     num1 = result;
-    num2 = '';    
+    num2 = '';
     operator = null;
-    operator_previous = symbol;
 }
 
 
