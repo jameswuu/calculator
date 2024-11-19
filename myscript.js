@@ -6,12 +6,11 @@ let operator = null;
 let operator_previous = null;
 
 
-
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
         // Calculate answer using operate 
         if ((button.id === "equals" && ((num1 && num2 && operator))|| 
-            (num1 && num2 && operator) && button.id!=='number')
+            (num1 && num2 && operator) && button.id!=='number' && button.id!=='percent')
         ) {
             let answer = operate(num1,num2,operator);
             console.log(answer);
@@ -32,11 +31,20 @@ buttons.forEach((button) => {
         }
 
         // Update num1 and num2
-        if (button.id === "number") {
+        if (button.id === "number"){
             if (operator === null) {
                 num1 = num1 + button.textContent;
             } else {
                 num2 = num2 + button.textContent;
+            }
+        }
+
+        // Divide the numbers by 100
+        if (button.id === "percent") {
+            if (num1 && !operator) {
+                num1 = percent(num1);
+            } else if (num1 && operator) {
+                num2 = percent(num2);
             }
         }
 
@@ -78,18 +86,22 @@ buttons.forEach((button) => {
 });
 
 
+function percent(num) {
+    console.log("percent function ran");
+    return(parseFloat(num) / 100);
+}
 
 function operate(num1, num2, symbol) {
     // Debugging line
     console.log("operate function ran");
 
     if (symbol === '+') {
-        return (parseInt(num1, 10) + parseInt(num2, 10));
+        return (parseFloat(num1, 10) + parseFloat(num2, 10));
     } else if (symbol === '-') {
-        return (parseInt(num1, 10) - parseInt(num2, 10));
+        return (parseFloat(num1, 10) - parseFloat(num2, 10));
     } else if (symbol === '*') {
-        return (parseInt(num1, 10) * parseInt(num2, 10));
+        return (parseFloat(num1, 10) * parseFloat(num2, 10));
     } else if (symbol === '/') {
-        return (parseInt(num1, 10) / parseInt(num2, 10));
+        return (parseFloat(num1, 10) / parseFloat(num2, 10));
     } 
 }
