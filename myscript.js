@@ -4,7 +4,77 @@ let num1 = '';
 let num2 = '';
 let operator = null;
 
+// For keydown listener 
+document.addEventListener("keydown", (event) => {
+    switch (event.key) {
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+        case '0':
+            // Call function to handle numbers
+            handleNumber(event.key);
+            break;
+            
+        case '+':
+        case '-':
+        case '*':
+        case '/':
+            // Call function to handle operator input
+            handleOperatorInput(event.key);
+            break;
 
+        case 'Enter':
+            // Call function to handle equals
+            handleEquals();
+            break;
+
+        case 'Escape':
+            // Call function to handle clear
+            handleClear();
+            break;
+
+        case '.':
+            // Call function to handle decimal point
+            handleDot();
+            break;
+
+        default:
+            break; // Ignore other keys
+    }
+})
+
+function handleNumber(number) {
+    // Logic to add number to current input
+    console.log(`Number ${number} is pressed`);
+}
+
+function handleOperator(operator) {
+    // Logic to set operator
+    console.log(`Operator ${operator} is pressed`);
+}
+
+function handleEquals() {
+    // Logic to perform calculation
+    console.log("Enter key is pressed");
+}
+
+function handleClear() {
+    // Logic to clear the calculator
+    console.log("Escape key is pressed");
+}
+
+function handleDot() {
+    // Logic to add a dot/decimal point
+    console.log("Dot key is pressed");
+}
+
+// For button pressed listener
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
         // Calculate answer using operate 
@@ -28,11 +98,7 @@ buttons.forEach((button) => {
 
         // Update num1 and num2
         if (button.classList.contains("number")){
-            if (operator === null) {
-                num1 += button.textContent;
-            } else {
-                num2 += button.textContent;
-            }
+            addNumber(button.textContent);
             updateDisplay();
             debuggingLine(button.textContent); 
             return;
@@ -40,17 +106,7 @@ buttons.forEach((button) => {
 
         // Handle Decimal 
         if (button.id === "dot") {
-            if (!operator) {
-                // Check if '.' is not already in num1
-                if (!num1.includes('.')) {
-                    num1 += '.';
-                }
-            } else {
-                // Check if '.' is not already in num2
-                if (!num2.includes('.')) {
-                    num2 += '.';
-                }
-            }
+            adddot();
             updateDisplay();
             debuggingLine(button.textContent); 
             return;
@@ -82,12 +138,7 @@ buttons.forEach((button) => {
 
         // Change operator status 
         if (button.classList.contains("symbol")) {
-            if (num1 && num2 && operator) {
-                // Calculate the result only both numbers and operator are set
-                num1 = operate(num1, num2, operator);
-                num2 = ''; // Reset num2
-            }
-            operator = button.textContent; // Set the new operator
+            updateOpearator(button.textContent);
             updateDisplay();
             debuggingLine(button.textContent); 
             return;
@@ -121,6 +172,28 @@ function clearCalculator() {
     operator = null;
 }
 
+function addNumber(current_num) {
+    if (operator === null) {
+        num1 += current_num;
+    } else {
+        num2 += current_num;
+    }
+}
+
+function adddot() {
+    if (!operator) {
+        // Check if '.' is not already in num1
+        if (!num1.includes('.')) {
+            num1 += '.';
+        }
+    } else {
+        // Check if '.' is not already in num2
+        if (!num2.includes('.')) {
+            num2 += '.';
+        }
+    }
+}
+
 
 function resetCalculator(result) {
     console.log("Reset function ran");
@@ -139,6 +212,15 @@ function pos_neg(num) {
 function percent(num) {
     console.log("percent function ran");
     return(formatResult(parseFloat(num) / 100).toString());
+}
+
+function updateOpearator(current_operator) {
+    if (num1 && num2 && operator) {
+        // Calculate the result only both numbers and operator are set
+        num1 = operate(num1, num2, operator);
+        num2 = ''; // Reset num2
+    }
+    operator = current_operator; // Set the new operator
 }
 
 
