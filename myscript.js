@@ -9,31 +9,24 @@ let operator_previous = null;
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
         // Calculate answer using operate 
-        if ((button.id === "equals" && ((num1 && num2 && operator))|| 
-            (num1 && num2 && operator) && button.id !== 'number' 
-            && button.id !== 'percent' && button.id !== 'pos-neg')
-        ) {
+        if (button.id === "equals" && ((num1 && num2 && operator))) {
+
+            // Run the answer
             let answer = operate(num1,num2,operator);
-            console.log(answer);
 
             // Reset the num1, num2, and opeartor
-            num1 = answer;
-            num2 = '';
-            operator_previous = operator;
-            operator = null;
-        }
+            resetCalculator(answer, operator);
 
-        // first condition: Clear out all variables
+        } 
+
+        // Handle clear functionality
         if (button.id === "clear") {
-            num1 = '';
-            num2 = '';
-            operator = null;
-            operator_previous = null;
+            clearCalculator();
         }
 
         // Update num1 and num2
         if (button.id === "number"){
-            if (operator === null) {
+            if (operator === null && operator_previous === null) {
                 num1 = num1 + button.textContent;
             } else {
                 num2 = num2 + button.textContent;
@@ -60,18 +53,12 @@ buttons.forEach((button) => {
 
         // Change operator status 
         if (button.id === "symbol") {
-            if (num1 !== null && num2 === '' && operator === null) {
+            if (num1 && num2 === '' && !operator && !operator_previous) {
                 // Case 1: num1 exist
                 operator = button.textContent;
-            } else if (num1 !== null && operator !== null && operator_previous === null) {
+            } else if (num1 && num2 === '' && operator && !operator_previous) {
                 // Case 2: num1 and operator exist
                 num2 = num1;
-            } else if (num1 !== null && operator === null && operator_previous !== null) {
-                // Case 3: num1 and previous operator exist
-                num2 = num1;
-                operator = operator_previous;
-            } else if (num1 !== null && operator === null && operator_previous !== null) {
-                // Case 4: num1, opeartor, previous operator exists
             }
         }
 
@@ -85,16 +72,35 @@ buttons.forEach((button) => {
         } 
 
         // Debugging Line
-        console.log(`
-            The id of the button is ${button.id}
-            num1 is ${num1}
-            num2 is ${num2}
-            operator is ${operator}
-            operator-tmp is ${operator_previous}`)  
+        debuggingLine(button.id); 
    
     });
 });
 
+
+function debuggingLine(id) {
+    console.log(`
+        The id of the button is ${id}
+        num1 is ${num1}
+        num2 is ${num2}
+        operator is ${operator}
+        operator-tmp is ${operator_previous}`)  
+}
+
+function clearCalculator() {
+    num1 = '';
+    num2 = '';
+    operator = null;
+    operator_previous = null;
+}
+
+function resetCalculator(answer, operator) {
+    console.log("Reset function ran")
+    num1 = answer;
+    num2 = '';
+    operator_previous = operator;
+    operator = null;
+}
 
 function pos_neg(num) {
     console.log("pos-neg function ran");
