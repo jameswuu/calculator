@@ -38,6 +38,7 @@ buttons.forEach((button) => {
             return;
         }
 
+        // Handle Decimal 
         if (button.id === "dot") {
             if (!operator) {
                 // Check if '.' is not already in num1
@@ -123,7 +124,7 @@ function clearCalculator() {
 
 function resetCalculator(result) {
     console.log("Reset function ran");
-    num1 = result.toString();
+    num1 = formatResult(result).toString();
     num2 = '';
     operator = null;
 }
@@ -137,7 +138,7 @@ function pos_neg(num) {
 
 function percent(num) {
     console.log("percent function ran");
-    return(parseFloat(num) / 100).toString();
+    return(formatResult(parseFloat(num) / 100).toString());
 }
 
 
@@ -145,17 +146,46 @@ function operate(num1, num2, symbol) {
     // Debugging line
     console.log("operate function ran");
 
-    if (symbol === '+') {
-        return (parseFloat(num1) + parseFloat(num2)).toString();
-    } else if (symbol === '-') {
-        return (parseFloat(num1) - parseFloat(num2)).toString();
-    } else if (symbol === '*') {
-        return (parseFloat(num1) * parseFloat(num2)).toString();
-    } else if (symbol === '/') {
-        if (parseFloat(num2) === 0) {
-            return 'Error'; // Handle division by zero
-        } else {
-            return (parseFloat(num1) / parseFloat(num2)).toString();
-        }
-    } 
+    let solution;
+    switch (symbol) {
+        case '+':
+            solution = (parseFloat(num1) + parseFloat(num2));
+            break;
+        case '-':
+            solution = (parseFloat(num1) - parseFloat(num2));
+            break;
+        case '*':
+            solution = (parseFloat(num1) * parseFloat(num2));
+            break;
+        case '/':
+            if (parseFloat(num2) === 0) {
+                return 'Error';
+            }
+            solution = (parseFloat(num1) / parseFloat(num2));
+            break;
+        default: //To handle any other unexpected cases
+            return 'Error';
+    }
+
+    return formatResult(solution);
+}
+
+
+function formatResult(num) {
+    // Limit the answer within certain range 
+    let beforeFormatted = Number(num);
+    if (beforeFormatted >= 1e99 || beforeFormatted <= -1e99) {
+        return 'Error'
+    }
+
+     // Convert to scientific notation
+    if (beforeFormatted >= 1e8 || beforeFormatted <= -1e8) {
+        return beforeFormatted.toExponential(2);
+    }
+ 
+    // Have a fixed decimal places
+    let formatted = beforeFormatted.toFixed(10);
+
+    // Convert to a number to remove trailing zeros
+    return parseFloat(formatted).toString();
 }
