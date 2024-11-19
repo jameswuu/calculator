@@ -1,8 +1,10 @@
-let buttons = document.querySelectorAll(".calculator-button")
+let buttons = document.querySelectorAll(".calculator-button");
+let display = document.querySelector(".display");
 let num1 = '';
 let num2 = '';
 let operator = null;
 let operator_previous = null;
+
 
 
 buttons.forEach((button) => {
@@ -50,8 +52,19 @@ buttons.forEach((button) => {
                 // Case 3: num1 and previous operator exist
                 num2 = num1;
                 operator = operator_previous;
+            } else if (num1 !== null && operator === null && operator_previous !== null) {
+                // Case 4: num1, opeartor, previous operator exists
             }
         }
+
+        // Populate the display 
+        if (!operator) {
+            display.innerHTML = num1;
+        } else if (num1 && operator && !num2) {
+            display.innerHTML = num1;
+        } else if (num1 && operator && num2) {
+            display.innerHTML = num2;
+        } 
 
         // Debugging Line
         console.log(`
