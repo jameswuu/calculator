@@ -17,31 +17,52 @@ document.addEventListener("keydown", (event) => {
         case '8':
         case '9':
         case '0':
-            // Call function to handle numbers
-            handleNumber(event.key);
+            // Handle numbers
+            console.log(`Number ${event.key} is pressed`);
+            addNumber(event.key);
+            updateDisplay();
+            debuggingLine(event.key); 
             break;
             
         case '+':
         case '-':
         case '*':
         case '/':
-            // Call function to handle operator input
-            handleOperatorInput(event.key);
+            // Handle operator input
+            console.log(`Operator ${event.key} is pressed`);
+            updateOpearator(event.key);
+            updateDisplay();
+            debuggingLine(event.key); 
             break;
 
         case 'Enter':
-            // Call function to handle equals
-            handleEquals();
+            // Handle equals
+            console.log(`Enter is pressed`);
+            if (num1 && num2 && operator) {
+                // Run the answer
+                let answer = operate(num1, num2, operator);
+    
+                // Reset the num1, num2, and opeartor
+                resetCalculator(answer, operator);
+                updateDisplay();
+                debuggingLine(event.key); 
+            } 
             break;
 
         case 'Escape':
-            // Call function to handle clear
-            handleClear();
+            // Handle clear
+            console.log(`Escape is pressed`);
+            clearCalculator();
+            updateDisplay();
+            debuggingLine(event.key); 
             break;
 
         case '.':
-            // Call function to handle decimal point
-            handleDot();
+            // Handle decimal point
+            console.log(`Dot is pressed`);
+            adddot();
+            updateDisplay();
+            debuggingLine(event.key); 
             break;
 
         default:
@@ -49,30 +70,6 @@ document.addEventListener("keydown", (event) => {
     }
 })
 
-function handleNumber(number) {
-    // Logic to add number to current input
-    console.log(`Number ${number} is pressed`);
-}
-
-function handleOperator(operator) {
-    // Logic to set operator
-    console.log(`Operator ${operator} is pressed`);
-}
-
-function handleEquals() {
-    // Logic to perform calculation
-    console.log("Enter key is pressed");
-}
-
-function handleClear() {
-    // Logic to clear the calculator
-    console.log("Escape key is pressed");
-}
-
-function handleDot() {
-    // Logic to add a dot/decimal point
-    console.log("Dot key is pressed");
-}
 
 // For button pressed listener
 buttons.forEach((button) => {
@@ -147,7 +144,7 @@ buttons.forEach((button) => {
 });
 
 
-// Populate the display 
+
 function updateDisplay() {
     if (num2) {
         display.innerHTML = num2; // Show current input if num2 is set
@@ -156,7 +153,6 @@ function updateDisplay() {
     }
 }
 
-
 function debuggingLine(element) {
     console.log(`
         The content of the button is ${element}
@@ -164,7 +160,6 @@ function debuggingLine(element) {
         num2 is ${num2}
         operator is ${operator}`)  
 }
-
 
 function clearCalculator() {
     num1 = '';
@@ -194,7 +189,6 @@ function adddot() {
     }
 }
 
-
 function resetCalculator(result) {
     console.log("Reset function ran");
     num1 = formatResult(result).toString();
@@ -202,12 +196,10 @@ function resetCalculator(result) {
     operator = null;
 }
 
-
 function pos_neg(num) {
     console.log("pos-neg function ran");
     return(parseFloat(num) * (-1)).toString();
 }
-
 
 function percent(num) {
     console.log("percent function ran");
@@ -222,7 +214,6 @@ function updateOpearator(current_operator) {
     }
     operator = current_operator; // Set the new operator
 }
-
 
 function operate(num1, num2, symbol) {
     // Debugging line
@@ -251,7 +242,6 @@ function operate(num1, num2, symbol) {
 
     return formatResult(solution);
 }
-
 
 function formatResult(num) {
     // Limit the answer within certain range 
