@@ -38,6 +38,23 @@ buttons.forEach((button) => {
             return;
         }
 
+        if (button.id === "dot") {
+            if (!operator) {
+                // Check if '.' is not already in num1
+                if (!num1.includes('.')) {
+                    num1 += '.';
+                }
+            } else {
+                // Check if '.' is not already in num2
+                if (!num2.includes('.')) {
+                    num2 += '.';
+                }
+            }
+            updateDisplay();
+            debuggingLine(button.id); 
+            return;
+        }
+
         // Handle Percentage
         if (button.id === "percent") {
             if (num1 && !operator) {
