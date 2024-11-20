@@ -13,4 +13,11 @@ The Calculator is a web application that brings together various concepts learne
 5. **Additional Features**: Future enhancements may include support for decimal inputs, keyboard support, and a history of calculations.
 
 ### Expectations
-This project is expected to present some challenges because it requires careful planning regarding the interaction between the UI and the backend. Additional features may be added as necessary.
+This project is expected to present some challenges because it requires careful planning regarding the interaction between the UI and the backend.
+
+### After Thoughts
+I completed this project after two full days of hard coding. I encountered many different problems that I had never faced before, especially since it includes various features like addition, subtraction, and more that need to work together. This posed many challenges, as establishing the conditions in the if statements sometimes conflicted and contradicted each other. I utilized many resources, including open-source help from Stack Overflow, Odin's Project content, and OpenAI.
+
+Before starting this project, I was extremely excited but also anxious about my ability to complete it. Despite my lack of coding experience, I learned a lot and became a better programmer overall. From brainstorming ideas and planning the necessary features and functions to coding and eventually revisiting and adjusting my ideas when things didn’t work as expected, the process was invaluable.
+
+Overall, the project was challenging, but I enjoyed the struggle, which has made me a better problem solver and programmer. There is still a long way for me to go in the world of computer science. I believe I will continuously encounter many roadblocks or even setbacks in my journey to becoming a full-stack programmer. However, my determination, agility, and goals to become a programmer will help me through all the challenges!
