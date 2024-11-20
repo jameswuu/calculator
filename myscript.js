@@ -30,7 +30,7 @@ document.addEventListener("keydown", (event) => {
         case '/':
             // Handle operator input
             console.log(`Operator ${event.key} is pressed`);
-            updateOpearator(event.key);
+            updateOperator(event.key);
             updateDisplay();
             debuggingLine(event.key); 
             break;
@@ -43,7 +43,7 @@ document.addEventListener("keydown", (event) => {
                 let answer = operate(num1, num2, operator);
     
                 // Reset the num1, num2, and opeartor
-                resetCalculator(answer, operator);
+                resetCalculator(answer);
                 updateDisplay();
                 debuggingLine(event.key); 
             } 
@@ -80,7 +80,7 @@ buttons.forEach((button) => {
             let answer = operate(num1, num2, operator);
 
             // Reset the num1, num2, and opeartor
-            resetCalculator(answer, operator);
+            resetCalculator(answer);
             updateDisplay();
             debuggingLine(button.textContent); 
             return;
@@ -135,7 +135,7 @@ buttons.forEach((button) => {
 
         // Change operator status 
         if (button.classList.contains("symbol")) {
-            updateOpearator(button.textContent);
+            updateOperator(button.textContent);
             updateDisplay();
             debuggingLine(button.textContent); 
             return;
@@ -206,7 +206,7 @@ function percent(num) {
     return(formatResult(parseFloat(num) / 100).toString());
 }
 
-function updateOpearator(current_operator) {
+function updateOperator(current_operator) {
     if (num1 && num2 && operator) {
         // Calculate the result only both numbers and operator are set
         num1 = operate(num1, num2, operator);
